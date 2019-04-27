@@ -1,18 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { injectIntl, FormattedMessage } from 'react-intl';
 import { getShowEditPost } from '../../../App/AppReducer';
 import { fetchPost, editPostRequest } from '../../PostActions';
 import { toggleEditPost } from '../../../App/AppActions';
-
+import { injectIntl, FormattedMessage } from 'react-intl';
 
 // Import Style
 import styles from '../../components/PostListItem/PostListItem.css';
 
-// Import Actions
-import { fetchPost } from '../../PostActions';
 
 // Import Selectors
 import { getPost } from '../../PostReducer';
@@ -62,6 +59,7 @@ export class PostDetailPage extends Component {
       </div>
     );
   };
+
   render() {
     return (
       <div>
@@ -76,6 +74,7 @@ export class PostDetailPage extends Component {
     );
   }
 }
+
 // Actions required to provide data for this component to render in server side.
 PostDetailPage.need = [params => {
   return fetchPost(params.cuid);
@@ -88,19 +87,11 @@ function mapDispatchToProps(dispatch, props) {
   };
 }
 
-function mapStateToProps(state, props) {
-  return {
-    post: getPost(state, props.params.cuid),
-    showEditPost: getShowEditPost(state),
-  };
-}
-
-
-
 // Retrieve data from store as props
 function mapStateToProps(state, props) {
   return {
     post: getPost(state, props.params.cuid),
+    showEditPost: getShowEditPost(state),
   };
 }
 
